@@ -4,62 +4,192 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MHT-CET College Predictor 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --primary:#2563eb; --primary-dark:#1d4ed8; --bg:#f8fafc; --card:#ffffff;
-    --text:#0f172a; --muted:#64748b; --border:#e2e8f0; --success:#16a34a; --good-bg:#dcfce7; --good-text:#166534;
+    --primary:#7c3aed; --primary2:#2563eb; --accent:#ec4899; --accent2:#f59e0b;
+    --bg:#0f0c1d; --bg2:#f8f7fc; --card:#ffffff; --text:#1e1b2e; --muted:#6b7280;
+    --border:#e5e0f5; --success:#10b981; --warn:#f59e0b; --danger:#ef4444;
+    --safe-bg:#d1fae5; --safe-text:#065f46;
+    --target-bg:#fef3c7; --target-text:#92400e;
+    --ambitious-bg:#fee2e2; --ambitious-text:#991b1b;
+    --radius:16px; --radius-sm:10px;
   }
   *{box-sizing:border-box;}
-  body{font-family:'Segoe UI',Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:var(--text);}
-  header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:28px 20px;text-align:center;}
-  header h1{margin:0;font-size:1.8rem;}
-  header p{margin:6px 0 0;opacity:.9;font-size:.95rem;}
-  .container{max-width:1100px;margin:0 auto;padding:20px;}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.05);}
-  .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
-  .field-help{font-size:.75rem;color:var(--muted);margin:2px 0 6px;}
-  label{display:block;font-size:.85rem;font-weight:600;margin-bottom:4px;color:var(--muted);}
-  select, input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:.95rem;background:#fff;}
-  select:focus, input:focus{outline:2px solid var(--primary);border-color:var(--primary);}
-  button{background:var(--primary);color:#fff;border:none;padding:12px 22px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;margin-top:16px;}
-  button:hover{background:var(--primary-dark);}
-  button.secondary{background:#fff;color:var(--primary);border:1px solid var(--primary);}
-  button.secondary:hover{background:#eff6ff;}
-  .actions{display:flex;gap:10px;flex-wrap:wrap;}
-  .checks{display:flex;flex-wrap:wrap;gap:10px;}
-  .check{display:flex;align-items:center;gap:6px;font-size:.85rem;font-weight:500;background:#f1f5f9;padding:8px 12px;border-radius:20px;color:var(--text);}
-  .check input{width:auto;}
-  .status-msg{font-size:.9rem;color:var(--muted);margin-top:10px;}
-  .insight{margin-top:14px;font-size:.82rem;color:var(--muted);background:#f1f5f9;padding:10px 14px;border-radius:8px;}
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
-  .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;}
-  .stat small{display:block;color:var(--muted);font-size:.75rem;margin-bottom:4px;}
-  .stat strong{font-size:1.3rem;}
-  .mode-toggles{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
-  .mini-toggle{background:#fff;border:1px solid var(--border);color:var(--text);border-radius:20px;padding:8px 16px;font-size:.85rem;cursor:pointer;font-weight:600;}
-  .mini-toggle.active{background:var(--primary);color:#fff;border-color:var(--primary);}
-  table{width:100%;border-collapse:collapse;font-size:.88rem;}
-  th, td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:left;}
-  th{background:#f1f5f9;position:sticky;top:0;}
-  tr:hover{background:#f8fafc;}
-  .pill{display:inline-block;background:#e0f2fe;color:#075985;padding:2px 8px;border-radius:20px;font-size:.75rem;font-weight:600;}
-  .pill-success{background:var(--good-bg);color:var(--good-text);}
-  .pill-band-safe{background:#dcfce7;color:#166534;}
-  .pill-band-target{background:#fef3c7;color:#92400e;}
-  .pill-band-ambitious{background:#fee2e2;color:#991b1b;}
-  .result-count{font-weight:600;margin-bottom:10px;}
-  .table-wrap{max-height:600px;overflow:auto;border:1px solid var(--border);border-radius:8px;}
-  footer{text-align:center;padding:20px;color:var(--muted);font-size:.8rem;}
-  .disclaimer{background:#fffbeb;border:1px solid #fde68a;color:#92400e;padding:12px 16px;border-radius:8px;font-size:.85rem;margin-bottom:16px;}
-  .empty{padding:40px;text-align:center;color:var(--muted);}
-  @media (max-width:600px){ header h1{font-size:1.3rem;} .stats{grid-template-columns:repeat(2,1fr);} }
+  body{
+    font-family:'Inter',sans-serif; margin:0; background:var(--bg2); color:var(--text);
+    -webkit-tap-highlight-color:transparent;
+  }
+  h1,h2,h3{font-family:'Poppins',sans-serif;}
+
+  header{
+    background:linear-gradient(135deg,#7c3aed 0%,#ec4899 50%,#f59e0b 100%);
+    color:#fff; padding:36px 20px 90px; text-align:center; position:relative; overflow:hidden;
+  }
+  header::before{
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(255,255,255,.15), transparent 40%),
+               radial-gradient(circle at 80% 60%, rgba(255,255,255,.12), transparent 45%);
+  }
+  header .inner{position:relative; z-index:1;}
+  header h1{margin:0; font-size:clamp(1.6rem,5vw,2.4rem); font-weight:800; letter-spacing:-0.5px;}
+  header p{margin:10px 0 0; opacity:.95; font-size:clamp(.85rem,2.5vw,1.05rem); max-width:560px; margin-inline:auto;}
+  .badge-row{display:flex; gap:8px; justify-content:center; margin-top:16px; flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.2); backdrop-filter:blur(6px); padding:6px 14px; border-radius:999px; font-size:.75rem; font-weight:600;}
+
+  .container{max-width:1100px; margin:-60px auto 0; padding:0 16px 40px; position:relative; z-index:2;}
+
+  .card{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px; margin-bottom:20px; box-shadow:0 10px 40px -10px rgba(124,58,237,.15);
+  }
+  .disclaimer{
+    background:linear-gradient(135deg,#fff7ed,#fef3c7); border:1px solid #fde68a; color:#92400e;
+    padding:12px 16px; border-radius:var(--radius-sm); font-size:.82rem; margin-bottom:16px;
+    display:flex; align-items:center; gap:8px;
+  }
+
+  .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;}
+  .field-help{font-size:.72rem; color:var(--muted); margin:2px 0 6px;}
+  label{display:block; font-size:.82rem; font-weight:700; margin-bottom:4px; color:var(--text);}
+  select, input{
+    width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    font-size:.92rem; background:#fbfaff; font-family:'Inter',sans-serif; color:var(--text); transition:.15s;
+  }
+  select:focus, input:focus{outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(124,58,237,.12);}
+
+  /* Multiselect dropdown */
+  .multiselect{position:relative;}
+  .ms-trigger{
+    width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:var(--radius-sm);
+    background:#fbfaff; font-size:.9rem; cursor:pointer; display:flex; justify-content:space-between; align-items:center;
+    gap:6px; color:var(--text); font-family:'Inter',sans-serif;
+  }
+  .ms-trigger:hover{border-color:var(--primary);}
+  .ms-trigger .chev{transition:transform .2s; color:var(--muted); flex-shrink:0;}
+  .ms-trigger.open .chev{transform:rotate(180deg);}
+  .ms-count{background:var(--primary); color:#fff; border-radius:999px; font-size:.68rem; padding:1px 7px; font-weight:700; margin-left:4px;}
+  .ms-label{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; text-align:left;}
+  .ms-panel{
+    position:absolute; top:calc(100% + 6px); left:0; right:0; background:#fff; border:1.5px solid var(--border);
+    border-radius:var(--radius-sm); box-shadow:0 12px 30px -8px rgba(0,0,0,.18); z-index:50; max-height:280px;
+    display:none; flex-direction:column; overflow:hidden;
+  }
+  .ms-panel.open{display:flex;}
+  .ms-search{padding:8px; border-bottom:1px solid var(--border);}
+  .ms-search input{padding:8px 10px; font-size:.85rem;}
+  .ms-options{overflow-y:auto; padding:6px;}
+  .ms-option{
+    display:flex; align-items:center; gap:8px; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:.85rem;
+  }
+  .ms-option:hover{background:#f3f0ff;}
+  .ms-option input{width:auto; margin:0;}
+  .ms-actions{display:flex; justify-content:space-between; padding:8px 10px; border-top:1px solid var(--border); background:#fafafa;}
+  .ms-actions button{background:none; border:none; color:var(--primary); font-weight:700; font-size:.78rem; cursor:pointer; padding:4px 8px;}
+
+  .checks{display:flex; flex-wrap:wrap; gap:8px;}
+  .check{
+    display:flex; align-items:center; gap:6px; font-size:.82rem; font-weight:600; background:#f3f0ff;
+    padding:8px 14px; border-radius:999px; color:var(--primary); border:1.5px solid transparent; cursor:pointer; transition:.15s;
+  }
+  .check:hover{border-color:var(--primary);}
+  .check input{width:auto; accent-color:var(--primary);}
+
+  .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px;}
+  button{
+    border:none; padding:13px 26px; border-radius:999px; font-size:.92rem; font-weight:700; cursor:pointer;
+    font-family:'Inter',sans-serif; transition:.15s;
+  }
+  button.primary{background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff; box-shadow:0 6px 18px -4px rgba(124,58,237,.5);}
+  button.primary:hover{transform:translateY(-1px); box-shadow:0 8px 22px -4px rgba(124,58,237,.6);}
+  button.secondary{background:#fff; color:var(--primary); border:1.5px solid var(--primary);}
+  button.secondary:hover{background:#f3f0ff;}
+
+  .status-msg{font-size:.85rem; color:var(--muted); margin-top:14px;}
+  .insight{
+    margin-top:12px; font-size:.8rem; color:var(--primary); background:#f3f0ff; padding:10px 14px;
+    border-radius:var(--radius-sm); font-weight:500;
+  }
+
+  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:18px;}
+  .stat{
+    background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm); padding:16px;
+    text-align:center; position:relative; overflow:hidden;
+  }
+  .stat::before{content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--primary),var(--accent));}
+  .stat small{display:block; color:var(--muted); font-size:.7rem; margin-bottom:4px; font-weight:600; text-transform:uppercase; letter-spacing:.3px;}
+  .stat strong{font-size:1.4rem; font-family:'Poppins',sans-serif; color:var(--text);}
+
+  .mode-toggles{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;}
+  .mini-toggle{
+    background:#fff; border:1.5px solid var(--border); color:var(--text); border-radius:999px; padding:9px 18px;
+    font-size:.85rem; cursor:pointer; font-weight:700; transition:.15s;
+  }
+  .mini-toggle.active{background:linear-gradient(135deg,var(--primary),var(--accent)); color:#fff; border-color:transparent; box-shadow:0 4px 14px -2px rgba(124,58,237,.4);}
+
+  .result-count{font-weight:700; margin-bottom:12px; font-size:1rem;}
+
+  /* Desktop table */
+  .table-wrap{max-height:600px; overflow:auto; border:1px solid var(--border); border-radius:var(--radius-sm);}
+  table{width:100%; border-collapse:collapse; font-size:.85rem;}
+  th, td{padding:11px 10px; border-bottom:1px solid var(--border); text-align:left;}
+  th{background:#f8f7fc; position:sticky; top:0; font-weight:700; color:var(--muted); text-transform:uppercase; font-size:.68rem; letter-spacing:.4px;}
+  tr:hover{background:#faf9ff;}
+  .pill{display:inline-block; background:#e0f2fe; color:#075985; padding:3px 10px; border-radius:999px; font-size:.72rem; font-weight:700;}
+  .pill-success{background:#f3f0ff; color:var(--primary);}
+  .pill-band-safe{background:var(--safe-bg); color:var(--safe-text);}
+  .pill-band-target{background:var(--target-bg); color:var(--target-text);}
+  .pill-band-ambitious{background:var(--ambitious-bg); color:var(--ambitious-text);}
+
+  /* Mobile cards - shown instead of table on small screens */
+  .result-cards{display:none; flex-direction:column; gap:12px;}
+  .rcard{
+    background:#fff; border:1.5px solid var(--border); border-radius:var(--radius-sm); padding:16px;
+    position:relative; overflow:hidden;
+  }
+  .rcard::before{content:''; position:absolute; top:0; left:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--primary),var(--accent));}
+  .rcard-top{display:flex; justify-content:space-between; gap:10px; align-items:flex-start;}
+  .rcard-top h4{margin:0; font-size:.95rem; font-weight:700; line-height:1.3;}
+  .rcard-top .sub{font-size:.78rem; color:var(--muted); margin-top:2px;}
+  .rcard-band{font-size:.68rem; font-weight:800; padding:4px 10px; border-radius:999px; white-space:nowrap;}
+  .rcard-meta{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px;}
+  .rcard-meta div{display:flex; flex-direction:column; gap:2px;}
+  .rcard-meta span{font-size:.65rem; color:var(--muted); text-transform:uppercase; font-weight:700; letter-spacing:.3px;}
+  .rcard-meta strong{font-size:.85rem;}
+  .rcard-tags{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px;}
+  .rcard-tags .pill{font-size:.68rem;}
+
+  .empty{padding:50px 20px; text-align:center; color:var(--muted);}
+  .empty .emoji{font-size:2.5rem; display:block; margin-bottom:10px;}
+
+  footer{text-align:center; padding:24px 16px; color:var(--muted); font-size:.78rem;}
+
+  @media (max-width:720px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+    .table-wrap{display:none;}
+    .result-cards{display:flex;}
+    header{padding:28px 16px 70px;}
+    .container{margin-top:-45px;}
+    .card{padding:16px;}
+  }
+  @media (min-width:721px){
+    .result-cards{display:none !important;}
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>🎓 MHT-CET College Predictor 2026</h1>
-  <p>Check which engineering colleges you can get into, based on CAP Round I cutoff data</p>
+  <div class="inner">
+    <h1>🎓 MHT-CET College Predictor 2026</h1>
+    <p>Find out which engineering colleges you can realistically get into — instantly, based on real CAP Round I cutoff data.</p>
+    <div class="badge-row">
+      <span class="badge">✨ 22,000+ cutoff records</span>
+      <span class="badge">🏛️ 360+ colleges</span>
+      <span class="badge">📱 Mobile friendly</span>
+    </div>
+  </div>
 </header>
 
 <div class="container">
@@ -72,22 +202,22 @@
     <div class="form-grid">
       <div>
         <label for="percentile">Your Percentile (%)</label>
-        <p class="field-help">Enter your CET percentile exactly, e.g. 88.45</p>
+        <p class="field-help">Enter it exactly, e.g. 88.45</p>
         <input type="number" id="percentile" placeholder="e.g. 88.45" step="0.0001" min="0" max="100">
       </div>
       <div>
         <label for="gender">Gender</label>
-        <p class="field-help">Ladies includes ladies-reserved categories too</p>
+        <p class="field-help">Ladies includes ladies-reserved categories</p>
         <select id="gender"><option value="G">Male / General</option><option value="L">Female / Ladies</option></select>
       </div>
       <div>
         <label for="seatType">Seat Region</label>
-        <p class="field-help">Auto checks home, other-university, and state-level seats</p>
+        <p class="field-help">Auto checks all seat pools together</p>
         <select id="seatType"><option value="auto">Auto-detect</option><option value="H">Home University only</option><option value="O">Other Than Home University only</option><option value="S">State Level only</option></select>
       </div>
       <div>
         <label for="studentUni">Your Home University</label>
-        <p class="field-help">Region your candidature / domicile belongs to</p>
+        <p class="field-help">Region your candidature belongs to</p>
         <select id="studentUni"><option value="">Loading...</option></select>
       </div>
       <div>
@@ -95,21 +225,45 @@
         <p class="field-help">Main category; add extra quotas below</p>
         <select id="baseCategory"><option value="OPEN">OPEN</option><option value="SC">SC</option><option value="ST">ST</option><option value="VJ">VJ</option><option value="NT1">NT1</option><option value="NT2">NT2</option><option value="NT3">NT3</option><option value="OBC">OBC</option><option value="SEBC">SEBC</option></select>
       </div>
+
       <div>
-        <label for="program">Branch / Program</label>
-        <select id="program"><option value="">All Programs</option></select>
+        <label for="programTrigger">Branch / Program</label>
+        <p class="field-help">Select one or more branches</p>
+        <div class="multiselect" id="programMs">
+          <button type="button" class="ms-trigger" id="programTrigger">
+            <span class="ms-label">All Programs</span>
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="ms-panel" id="programPanel">
+            <div class="ms-search"><input type="text" placeholder="Search branch..." id="programFilterInput"></div>
+            <div class="ms-options" id="programOptions"></div>
+            <div class="ms-actions"><button data-action="clear" data-target="program">Clear</button><button data-action="done" data-target="program">Done</button></div>
+          </div>
+        </div>
       </div>
+
       <div>
-        <label for="status">College Type</label>
-        <select id="status"><option value="">All Types</option></select>
+        <label for="statusTrigger">College Type</label>
+        <p class="field-help">Select one or more types</p>
+        <div class="multiselect" id="statusMs">
+          <button type="button" class="ms-trigger" id="statusTrigger">
+            <span class="ms-label">All Types</span>
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="ms-panel" id="statusPanel">
+            <div class="ms-options" id="statusOptions"></div>
+            <div class="ms-actions"><button data-action="clear" data-target="status">Clear</button><button data-action="done" data-target="status">Done</button></div>
+          </div>
+        </div>
       </div>
+
       <div>
         <label for="collegeSearch">Search College Name</label>
         <input type="text" id="collegeSearch" placeholder="e.g. Amravati">
       </div>
     </div>
 
-    <div class="checks" style="margin-top:16px;">
+    <div class="checks" style="margin-top:18px;">
       <label class="check"><input type="checkbox" id="ews"> EWS</label>
       <label class="check"><input type="checkbox" id="tfws"> TFWS</label>
       <label class="check"><input type="checkbox" id="orphan"> Orphan</label>
@@ -118,29 +272,30 @@
     </div>
 
     <div class="actions">
-      <button id="searchBtn">Find Eligible Colleges</button>
+      <button class="primary" id="searchBtn">🔍 Find Eligible Colleges</button>
       <button class="secondary" id="resetBtn">Reset Filters</button>
     </div>
     <div class="status-msg" id="statusMsg">Loading dataset…</div>
-    <div class="insight" id="preferenceHint">The shortlist favors home-university seats first, then other-university seats, then state-level options.</div>
+    <div class="insight" id="preferenceHint">💡 The shortlist favors home-university seats first, then other-university seats, then state-level options.</div>
   </div>
 
   <div class="stats">
     <div class="stat"><small>Total Records</small><strong id="recordCount">0</strong></div>
     <div class="stat"><small>Eligible Matches</small><strong id="eligibleCount">0</strong></div>
-    <div class="stat"><small>Unique Colleges/Programs</small><strong id="displayCount">0</strong></div>
+    <div class="stat"><small>Unique Programs</small><strong id="displayCount">0</strong></div>
     <div class="stat"><small>Mode</small><strong id="modeLabel">Balanced</strong></div>
   </div>
 
   <div class="mode-toggles" id="modeToggles">
-    <button class="mini-toggle active" data-mode="balanced">Balanced</button>
-    <button class="mini-toggle" data-mode="safe">Safe</button>
-    <button class="mini-toggle" data-mode="target">Target</button>
-    <button class="mini-toggle" data-mode="ambitious">Ambitious</button>
+    <button class="mini-toggle active" data-mode="balanced">⚖️ Balanced</button>
+    <button class="mini-toggle" data-mode="safe">✅ Safe</button>
+    <button class="mini-toggle" data-mode="target">🎯 Target</button>
+    <button class="mini-toggle" data-mode="ambitious">🚀 Ambitious</button>
   </div>
 
   <div class="card" id="resultsCard" style="display:none;">
     <div class="result-count" id="resultCount"></div>
+
     <div class="table-wrap">
       <table id="resultsTable">
         <thead>
@@ -160,6 +315,8 @@
         <tbody></tbody>
       </table>
     </div>
+
+    <div class="result-cards" id="resultCards"></div>
   </div>
 
 </div>
@@ -168,7 +325,7 @@
 
 <script>
 let DATA = [];
-let state = { mode: 'balanced' };
+let state = { mode: 'balanced', program: new Set(), status: new Set() };
 
 const els = {
   percentile: document.getElementById('percentile'),
@@ -176,8 +333,6 @@ const els = {
   seatType: document.getElementById('seatType'),
   studentUni: document.getElementById('studentUni'),
   baseCategory: document.getElementById('baseCategory'),
-  program: document.getElementById('program'),
-  status: document.getElementById('status'),
   collegeSearch: document.getElementById('collegeSearch'),
   ews: document.getElementById('ews'),
   tfws: document.getElementById('tfws'),
@@ -207,16 +362,86 @@ async function loadData(){
   }
 }
 
+/* ---------- Multiselect logic ---------- */
+function buildMultiselect(key, options, panelId, optionsId, triggerId, allowSearch){
+  const optionsEl = document.getElementById(optionsId);
+  optionsEl.innerHTML = options.map(o => `
+    <label class="ms-option"><input type="checkbox" value="${o.replace(/"/g,'&quot;')}" data-key="${key}"> ${o}</label>
+  `).join('');
+
+  optionsEl.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', ()=>{
+      if(cb.checked) state[key].add(cb.value); else state[key].delete(cb.value);
+      updateMsLabel(key, triggerId);
+    });
+  });
+
+  const trigger = document.getElementById(triggerId);
+  const panel = document.getElementById(panelId);
+  trigger.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    document.querySelectorAll('.ms-panel.open').forEach(p=>{ if(p.id !== panelId){ p.classList.remove('open'); p.previousElementSibling && p.previousElementSibling.classList.remove('open'); }});
+    panel.classList.toggle('open');
+    trigger.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e)=>{
+    if(!e.target.closest('#'+panelId) && !e.target.closest('#'+triggerId)){
+      panel.classList.remove('open');
+      trigger.classList.remove('open');
+    }
+  });
+}
+
+function updateMsLabel(key, triggerId){
+  const trigger = document.getElementById(triggerId);
+  const labelEl = trigger.querySelector('.ms-label');
+  const count = state[key].size;
+  const defaultLabel = key === 'program' ? 'All Programs' : 'All Types';
+  if(count === 0){
+    labelEl.textContent = defaultLabel;
+  } else if(count === 1){
+    labelEl.textContent = [...state[key]][0];
+  } else {
+    labelEl.textContent = `${count} selected`;
+  }
+}
+
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.ms-actions button');
+  if(!btn) return;
+  const target = btn.dataset.target;
+  const action = btn.dataset.action;
+  const panelId = target === 'program' ? 'programPanel' : 'statusPanel';
+  const triggerId = target === 'program' ? 'programTrigger' : 'statusTrigger';
+  if(action === 'clear'){
+    state[target].clear();
+    document.querySelectorAll(`#${panelId} input[type=checkbox]`).forEach(cb=>cb.checked=false);
+    updateMsLabel(target, triggerId);
+  }
+  document.getElementById(panelId).classList.remove('open');
+  document.getElementById(triggerId).classList.remove('open');
+});
+
+document.getElementById('programFilterInput').addEventListener('input', (e)=>{
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('#programOptions .ms-option').forEach(opt=>{
+    opt.style.display = opt.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+  });
+});
+
 function populateFilters(){
   const programs = [...new Set(DATA.map(r=>r.program_name))].sort();
   const statuses = [...new Set(DATA.map(r=>r.status))].sort();
   const unis = [...new Set(DATA.map(r=>r.university_name).filter(u=>u && u!=='Autonomous Institute'))].sort();
 
-  els.program.innerHTML = '<option value="">All Programs</option>' + programs.map(p=>`<option value="${p}">${p}</option>`).join('');
-  els.status.innerHTML = '<option value="">All Types</option>' + statuses.map(s=>`<option value="${s}">${s}</option>`).join('');
+  buildMultiselect('program', programs, 'programPanel', 'programOptions', 'programTrigger', true);
+  buildMultiselect('status', statuses, 'statusPanel', 'statusOptions', 'statusTrigger', false);
+
   els.studentUni.innerHTML = '<option value="">All / Not sure</option>' + unis.map(u=>`<option value="${u}">${u}</option>`).join('') + '<option value="Other">Other / Autonomous only</option>';
 }
 
+/* ---------- Filtering logic ---------- */
 function getPrefixes(){
   const gender = els.gender.value, seat = els.seatType.value, base = els.baseCategory.value;
   const prefixes = new Set();
@@ -245,7 +470,7 @@ function sectionWeight(section){
 function sectionAllowed(section, univName){
   const studentUni = els.studentUni.value;
   if(!section || section.includes('State Level')) return true;
-  if(!studentUni || studentUni === 'Other') return true; // no filter if unsure
+  if(!studentUni || studentUni === 'Other') return true;
   const isHomeMatch = univName === studentUni;
   const isHomeSeat = section.includes('Home University Seats');
   const forHomeCand = section.includes('Home University Candidates');
@@ -289,14 +514,14 @@ function search(){
   const p = parseFloat(els.percentile.value);
   if(isNaN(p)){ alert('Please enter your percentile.'); return; }
 
-  const prog = els.program.value;
-  const stat = els.status.value;
   const collegeQuery = els.collegeSearch.value.trim().toLowerCase();
   const targetCats = new Set(getPrefixes());
+  const progFilter = state.program;
+  const statFilter = state.status;
 
   let pool = DATA.filter(r=>{
-    if(stat && r.status !== stat) return false;
-    if(prog && r.program_name !== prog) return false;
+    if(statFilter.size && !statFilter.has(r.status)) return false;
+    if(progFilter.size && !progFilter.has(r.program_name)) return false;
     if(collegeQuery && !r.college_name.toLowerCase().includes(collegeQuery)) return false;
     if(els.seatType.value !== 'auto'){
       if(els.seatType.value === 'S' && !(r.section||'').includes('State Level')) return false;
@@ -320,11 +545,9 @@ function search(){
   }
 
   let resultsAll = [...grouped.values()];
-
   if(state.mode !== 'balanced'){
     resultsAll = resultsAll.filter(r => r._band === state.mode);
   }
-
   resultsAll.sort((a,b)=> b._score - a._score || Number(b.percentile)-Number(a.percentile) || (a.college_name||'').localeCompare(b.college_name||''));
   const results = resultsAll;
 
@@ -332,10 +555,10 @@ function search(){
   els.displayCount.textContent = results.length.toLocaleString();
 
   const hints = {
-    safe: 'Safe mode favors larger percentile margins and better-fit university-region seats.',
-    target: 'Target mode highlights near-match options that are plausible but not too conservative.',
-    ambitious: 'Ambitious mode brings in stretch options with smaller safety margins.',
-    balanced: 'Balanced mode mixes preference and cutoff strength.'
+    safe: '✅ Safe mode: showing only options with a comfortable percentile margin (12+ points).',
+    target: '🎯 Target mode: showing realistic matches with a moderate margin (4–12 points).',
+    ambitious: '🚀 Ambitious mode: showing stretch options with a tight margin (under 4 points).',
+    balanced: '⚖️ Balanced mode: showing all eligible options, best fit first.'
   };
   els.preferenceHint.textContent = hints[state.mode] || hints.balanced;
 
@@ -344,17 +567,19 @@ function search(){
 
 function renderResults(rows){
   els.resultsCard.style.display = 'block';
-  els.resultCount.textContent = `Found ${rows.length.toLocaleString()} eligible college/program combinations`;
-  const tbody = document.querySelector('#resultsTable tbody');
+  const bandClass = { safe:'pill-band-safe', target:'pill-band-target', ambitious:'pill-band-ambitious' };
+  const bandEmoji = { safe:'✅', target:'🎯', ambitious:'🚀' };
 
   if(!rows.length){
-    tbody.innerHTML = '';
-    els.resultCount.innerHTML = '<div class="empty">No matching eligible branches found. Try adjusting percentile, university, or category filters.</div>';
+    els.resultCount.innerHTML = '';
+    document.querySelector('#resultsTable tbody').innerHTML = '';
+    document.getElementById('resultCards').innerHTML = `<div class="empty"><span class="emoji">🔍</span>No matching eligible branches found.<br>Try adjusting your percentile, university, or category filters.</div>`;
     return;
   }
 
-  const bandClass = { safe:'pill-band-safe', target:'pill-band-target', ambitious:'pill-band-ambitious' };
+  els.resultCount.textContent = `Found ${rows.length.toLocaleString()} eligible college/program combinations`;
 
+  const tbody = document.querySelector('#resultsTable tbody');
   tbody.innerHTML = rows.map(r => `
     <tr>
       <td>${r.college_name} <span class="pill">${r.college_code}</span></td>
@@ -369,6 +594,30 @@ function renderResults(rows){
       <td><span class="pill ${bandClass[r._band]}">${r._band.toUpperCase()}</span></td>
     </tr>
   `).join('');
+
+  const cardsEl = document.getElementById('resultCards');
+  cardsEl.innerHTML = rows.map(r => `
+    <div class="rcard">
+      <div class="rcard-top">
+        <div>
+          <h4>${r.college_name}</h4>
+          <div class="sub">${r.program_name}</div>
+        </div>
+        <div class="rcard-band ${bandClass[r._band]}">${bandEmoji[r._band]} ${r._band.toUpperCase()}</div>
+      </div>
+      <div class="rcard-meta">
+        <div><span>Type</span><strong>${r.status}</strong></div>
+        <div><span>Category</span><strong>${r.category}</strong></div>
+        <div><span>Cutoff %ile</span><strong>${r.percentile.toFixed(2)}</strong></div>
+        <div><span>Margin</span><strong>+${r._gap.toFixed(2)}</strong></div>
+      </div>
+      <div class="rcard-tags">
+        <span class="pill">${r.college_code}</span>
+        <span class="pill">Merit ${r.merit_no.toLocaleString()}</span>
+        <span class="pill">${shortSection(r.section)}</span>
+      </div>
+    </div>
+  `).join('');
 }
 
 function resetFilters(){
@@ -377,14 +626,24 @@ function resetFilters(){
   els.seatType.value = 'auto';
   els.studentUni.value = '';
   els.baseCategory.value = 'OPEN';
-  els.program.value = '';
-  els.status.value = '';
   els.collegeSearch.value = '';
   els.ews.checked = false;
   els.tfws.checked = false;
   els.orphan.checked = false;
   els.pwd.checked = false;
   els.defence.checked = false;
+
+  state.program.clear();
+  state.status.clear();
+  document.querySelectorAll('#programOptions input, #statusOptions input').forEach(cb=>cb.checked=false);
+  updateMsLabel('program','programTrigger');
+  updateMsLabel('status','statusTrigger');
+
+  document.querySelectorAll('.mini-toggle').forEach(x=>x.classList.remove('active'));
+  document.querySelector('.mini-toggle[data-mode="balanced"]').classList.add('active');
+  state.mode = 'balanced';
+  els.modeLabel.textContent = 'Balanced';
+
   els.resultsCard.style.display = 'none';
   els.eligibleCount.textContent = '0';
   els.displayCount.textContent = '0';
@@ -399,7 +658,7 @@ document.getElementById('modeToggles').addEventListener('click', e=>{
   document.querySelectorAll('.mini-toggle').forEach(x=>x.classList.remove('active'));
   b.classList.add('active');
   state.mode = b.dataset.mode;
-  els.modeLabel.textContent = b.textContent;
+  els.modeLabel.textContent = b.textContent.replace(/^\S+\s/, '');
   search();
 });
 
