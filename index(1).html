@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MHT-CET College Finder 2026</title>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=zodiak@500,700&display=swap" rel="stylesheet">
+<style>
+:root { --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem); --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem); --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem); --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem); --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --radius-sm: .5rem; --radius-md: .8rem; --radius-lg: 1.1rem; --radius-xl: 1.5rem; --font-body: 'Satoshi', system-ui, sans-serif; --font-display: 'Zodiak', Georgia, serif; }
+:root,[data-theme="light"]{ --color-bg:#f7f6f2;--color-surface:#fcfbf8;--color-surface-2:#f2efe9;--color-border:#d8d4cd;--color-text:#27231d;--color-text-muted:#706d67;--color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-highlight:#dceaea;--color-good:#2f6e1f;--color-warn:#964219;--shadow-sm:0 2px 8px rgba(0,0,0,.05);--shadow-md:0 10px 28px rgba(0,0,0,.08); }
+[data-theme="dark"]{ --color-bg:#171614;--color-surface:#1d1c19;--color-surface-2:#252420;--color-border:#3a3834;--color-text:#e7e3dc;--color-text-muted:#aba49a;--color-primary:#4f98a3;--color-primary-hover:#72b6be;--color-primary-highlight:#213337;--color-good:#88c26b;--color-warn:#ffb17a;--shadow-sm:0 2px 8px rgba(0,0,0,.25);--shadow-md:0 10px 28px rgba(0,0,0,.35); }
+*{box-sizing:border-box} body{margin:0;font-family:var(--font-body);background:linear-gradient(180deg,var(--color-bg),var(--color-surface-2));color:var(--color-text);line-height:1.5} h1,h2,h3{font-family:var(--font-display);line-height:1.08;margin:0} p{margin:0;color:var(--color-text-muted)}
+.wrap{width:min(1200px,calc(100% - 2rem));margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 0}
+.eyebrow{display:inline-flex;gap:.5rem;align-items:center;padding:.4rem .8rem;border-radius:999px;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-sm);font-weight:700}
+.theme-toggle{border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);border-radius:999px;padding:.7rem .9rem;cursor:pointer}
+.hero{padding:var(--space-12) 0 var(--space-8)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:var(--space-8);align-items:start}
+.hero h1{font-size:var(--text-xl)}
+.hero p{margin-top:var(--space-4);max-width:64ch;font-size:var(--text-base)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:var(--space-4)}
+.chip{padding:.45rem .7rem;border-radius:999px;background:var(--color-primary-highlight);color:var(--color-primary);font-size:var(--text-xs);font-weight:700}
+.panel{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-6);box-shadow:var(--shadow-sm)}
+.form-panel .grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field.wide,.field.full{grid-column:1/-1}
+.field label{font-weight:700;font-size:var(--text-sm)}
+.field-help{font-size:var(--text-xs);color:var(--color-text-muted)}
+input,select{padding:.65rem .8rem;border-radius:var(--radius-sm);border:1px solid var(--color-border);background:var(--color-surface);color:var(--color-text);font-family:var(--font-body);font-size:var(--text-sm)}
+input:focus,select:focus{outline:2px solid var(--color-primary)}
+.checks{display:flex;flex-wrap:wrap;gap:.6rem}
+.check{display:flex;align-items:center;gap:.4rem;font-size:var(--text-sm);font-weight:500;background:var(--color-surface-2);padding:.4rem .7rem;border-radius:999px}
+.actions{display:flex;gap:.7rem;margin-top:var(--space-5);flex-wrap:wrap}
+button{border:none;border-radius:999px;padding:.75rem 1.4rem;font-weight:700;font-size:var(--text-sm);cursor:pointer;font-family:var(--font-body)}
+button.primary{background:var(--color-primary);color:#fff}
+button.primary:hover{background:var(--color-primary-hover)}
+button.secondary{background:var(--color-surface-2);color:var(--color-text);border:1px solid var(--color-border)}
+.insight{margin-top:var(--space-4);font-size:var(--text-xs);color:var(--color-text-muted);background:var(--color-surface-2);padding:.6rem .8rem;border-radius:var(--radius-sm)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin:var(--space-6) 0}
+.stat{text-align:center}
+.stat small{display:block;color:var(--color-text-muted);font-size:var(--text-xs);margin-bottom:.3rem}
+.stat strong{font-size:var(--text-lg)}
+.mode-toggles{display:flex;gap:.5rem;margin-bottom:var(--space-4);flex-wrap:wrap}
+.mini-toggle{background:var(--color-surface);border:1px solid var(--color-border);color:var(--color-text);border-radius:999px;padding:.5rem 1rem;font-size:var(--text-sm);cursor:pointer}
+.mini-toggle.active{background:var(--color-primary);color:#fff;border-color:var(--color-primary)}
+.results{display:grid;gap:var(--space-4);margin-bottom:var(--space-12)}
+.card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:var(--space-5);box-shadow:var(--shadow-sm)}
+.card-top{display:flex;justify-content:space-between;gap:var(--space-4);align-items:flex-start;flex-wrap:wrap}
+.card-top h3{font-size:var(--text-base)}
+.muted{color:var(--color-text-muted);font-size:var(--text-sm);margin-top:.2rem}
+.score{font-size:var(--text-xs);font-weight:700;background:var(--color-primary-highlight);color:var(--color-primary);padding:.4rem .7rem;border-radius:999px;white-space:nowrap}
+.score.good{background:#e4f3de;color:var(--color-good)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-top:var(--space-4)}
+.meta div{display:flex;flex-direction:column;gap:.2rem}
+.meta span{font-size:var(--text-xs);color:var(--color-text-muted)}
+.meta strong{font-size:var(--text-sm)}
+.eligible{color:var(--color-good)}
+.tag-row{display:flex;gap:.5rem;margin-top:var(--space-4);flex-wrap:wrap}
+.tag{font-size:var(--text-xs);background:var(--color-surface-2);padding:.3rem .6rem;border-radius:999px;color:var(--color-text-muted)}
+.empty{padding:var(--space-8);text-align:center;color:var(--color-text-muted);background:var(--color-surface);border-radius:var(--radius-lg);border:1px dashed var(--color-border)}
+footer{padding:var(--space-8) 0;text-align:center;color:var(--color-text-muted);font-size:var(--text-xs)}
+@media (max-width:800px){ .hero-grid{grid-template-columns:1fr} .form-panel .grid{grid-template-columns:1fr} .stats{grid-template-columns:repeat(2,1fr)} .meta{grid-template-columns:repeat(2,1fr)} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div class="eyebrow">MHT-CET 2025-26 · CAP Round I · College Eligibility Explorer</div>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">◐</button>
+  </div>
+
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <h1>Find colleges you can realistically target from your percentile, home-university status, and reservation category.</h1>
+        <p>The shortlist prioritizes colleges from your own home-university region first, then other-university seats, then state-level (autonomous) seats — matching how MHT-CET admissions actually work.</p>
+        <div class="chips">
+          <div class="chip">Home University aware</div>
+          <div class="chip">State level kept separate</div>
+          <div class="chip">Eligibility + preference scoring</div>
+        </div>
+      </div>
+      <div class="panel form-panel">
+        <div class="grid">
+          <div class="field">
+            <label for="percentile">Your percentile</label>
+            <p class="field-help">Enter your CET percentile exactly, e.g. 88.45.</p>
+            <input id="percentile" type="number" min="0" max="100" step="0.0001" placeholder="e.g. 88.45">
+          </div>
+          <div class="field">
+            <label for="gender">Gender</label>
+            <p class="field-help">Choose Ladies to include ladies-reserved categories.</p>
+            <select id="gender"><option value="G">Male / General</option><option value="L">Female / Ladies</option></select>
+          </div>
+          <div class="field">
+            <label for="seatType">Seat region</label>
+            <p class="field-help">Auto checks home-university, other-university, and state-level seats together.</p>
+            <select id="seatType"><option value="auto">Auto-detect from home university</option><option value="H">Home University only</option><option value="O">Other Than Home University only</option><option value="S">State Level only</option></select>
+          </div>
+          <div class="field wide">
+            <label for="studentUni">Your home university</label>
+            <p class="field-help">Select the university region your candidature / domicile belongs to.</p>
+            <select id="studentUni"></select>
+          </div>
+          <div class="field full">
+            <label for="baseCategory">Reservation category</label>
+            <p class="field-help">Pick your main category. Extra quotas below add more matches.</p>
+            <select id="baseCategory"><option value="OPEN">OPEN</option><option value="SC">SC</option><option value="ST">ST</option><option value="VJ">VJ</option><option value="NT1">NT1</option><option value="NT2">NT2</option><option value="NT3">NT3</option><option value="OBC">OBC</option><option value="SEBC">SEBC</option></select>
+          </div>
+          <div class="field full">
+            <label>Additional eligibility</label>
+            <p class="field-help">Turn on only the quotas you are officially eligible for.</p>
+            <div class="checks">
+              <label class="check"><input type="checkbox" id="ews"> EWS</label>
+              <label class="check"><input type="checkbox" id="tfws"> TFWS</label>
+              <label class="check"><input type="checkbox" id="orphan"> Orphan</label>
+              <label class="check"><input type="checkbox" id="pwd"> PWD</label>
+              <label class="check"><input type="checkbox" id="defence"> Defence</label>
+            </div>
+          </div>
+          <div class="field wide">
+            <label for="search">Branch / college keyword</label>
+            <p class="field-help">Optional. Search by branch, college name, or code.</p>
+            <input id="search" type="text" placeholder="Computer, AI, Amravati, etc.">
+          </div>
+          <div class="field wide">
+            <label for="universityType">Institute type</label>
+            <p class="field-help">Optional. Limit to government, autonomous, university dept, or private.</p>
+            <select id="universityType"><option value="">All institute types</option><option value="Government">Government</option><option value="Autonomous Institute">Autonomous Institute</option><option value="University Department">University Department</option><option value="Un-Aided">Un-Aided / Private</option></select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="runBtn">Show shortlist</button>
+          <button class="secondary" id="demoBtn">Reload data</button>
+        </div>
+        <div class="insight" id="preferenceHint">The shortlist favors home-university seats first, then other-university seats, then state-level options.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="panel stat"><small>Dataset status</small><strong id="datasetStatus">Loading…</strong></div>
+    <div class="panel stat"><small>Total records</small><strong id="recordCount">0</strong></div>
+    <div class="panel stat"><small>Eligible matches</small><strong id="eligibleCount">0</strong></div>
+    <div class="panel stat"><small>Shown colleges</small><strong id="displayCount">0</strong></div>
+  </section>
+
+  <div class="mode-toggles" id="modeToggles">
+    <button class="mini-toggle active" data-mode="balanced">Balanced</button>
+    <button class="mini-toggle" data-mode="safe">Safe</button>
+    <button class="mini-toggle" data-mode="target">Target</button>
+    <button class="mini-toggle" data-mode="ambitious">Ambitious</button>
+  </div>
+
+  <section class="results" id="resultList"></section>
+
+  <footer>Informational tool only, based on CAP Round I 2025-26 cutoff data from the State CET Cell, Maharashtra. Actual cutoffs vary by round and year.</footer>
+</div>
+
+<script>
+const state={raw:[],mode:'balanced'};
+const els={percentile:document.getElementById('percentile'),gender:document.getElementById('gender'),seatType:document.getElementById('seatType'),studentUni:document.getElementById('studentUni'),baseCategory:document.getElementById('baseCategory'),ews:document.getElementById('ews'),tfws:document.getElementById('tfws'),orphan:document.getElementById('orphan'),pwd:document.getElementById('pwd'),defence:document.getElementById('defence'),search:document.getElementById('search'),universityType:document.getElementById('universityType'),resultList:document.getElementById('resultList'),datasetStatus:document.getElementById('datasetStatus'),recordCount:document.getElementById('recordCount'),eligibleCount:document.getElementById('eligibleCount'),displayCount:document.getElementById('displayCount'),preferenceHint:document.getElementById('preferenceHint')};
+
+document.getElementById('runBtn').addEventListener('click',runFilter);
+document.getElementById('demoBtn').addEventListener('click',loadBundled);
+document.querySelector('[data-theme-toggle]').addEventListener('click',()=>{const r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='dark'?'light':'dark')});
+document.getElementById('modeToggles').addEventListener('click',e=>{const b=e.target.closest('button[data-mode]'); if(!b)return; document.querySelectorAll('.mini-toggle').forEach(x=>x.classList.remove('active')); b.classList.add('active'); state.mode=b.dataset.mode; runFilter();});
+
+async function loadBundled(){
+  try{
+    els.datasetStatus.textContent='Loading cutoff data...';
+    const res=await fetch('cutoff_data.json',{cache:'no-store'});
+    if(!res.ok) throw new Error('missing');
+    const data=await res.json();
+    setData(data,'Data loaded');
+    populateUniversities();
+  }catch(e){
+    els.datasetStatus.textContent='Data missing';
+    els.resultList.innerHTML='<div class="empty">Could not load cutoff_data.json. Keep it in the same folder as this HTML file.</div>';
+    console.error(e);
+  }
+}
+
+function setData(data,label){ state.raw=Array.isArray(data)?data:[]; els.datasetStatus.textContent=label; els.recordCount.textContent=state.raw.length.toLocaleString(); }
+
+function populateUniversities(){
+  const unis=[...new Set(state.raw.map(r=>r.university_name).filter(u=>u && u!=='Autonomous Institute'))].sort();
+  els.studentUni.innerHTML = unis.map(u=>`<option value="${u}">${u}</option>`).join('') + '<option value="Other">Other / Autonomous only</option>';
+}
+
+function getPrefixes(){
+  const gender=els.gender.value, seat=els.seatType.value, base=els.baseCategory.value, prefixes=new Set();
+  const add=(x)=>prefixes.add(x);
+  const seats=seat==='auto'?['H','O','S']:[seat];
+  seats.forEach(s=>{ if(s!=='S'){ add(`${gender}OPEN${s}`); if(base!=='OPEN') add(`${gender}${base}${s}`); } else { add(`${gender}OPENS`); if(base!=='OPEN') add(`${gender}${base}S`); } });
+  if(els.ews.checked) add('EWS');
+  if(els.tfws.checked) add('TFWS');
+  if(els.orphan.checked) add('ORPHAN');
+  if(els.pwd.checked) ['PWDOPENH','PWDOPENO','PWDOPENS','PWDOBCH','PWDOBCO','PWDOBCS','PWDROBCH','PWDROBCO','PWDROBCS','PWDRSCH','PWDRSCO','PWDRSCS','PWDRSEBCH','PWDRSEBCO','PWDRSEBCS'].forEach(add);
+  if(els.defence.checked) ['DEFOPENH','DEFOPENO','DEFOPENS','DEFSCH','DEFSCO','DEFSCS','DEFSEBCH','DEFSEBCO','DEFSEBCS','DEFRSEBCH','DEFRSEBCO','DEFRSEBCS','DEFOBCH','DEFOBCO','DEFOBCS','DEFRSCH','DEFRSCO','DEFRSCS','DEFROBCS','DEFROBCO','DEFROBCH'].forEach(add);
+  return [...prefixes];
+}
+
+function sectionWeight(section){
+  if(!section) return 0;
+  if(section.includes('State Level')) return 1;
+  if(section.includes('Home University Seats')) return section.includes('Home University Candidates') ? 5 : 3;
+  if(section.includes('Other Than Home University Seats')) return section.includes('Home University Candidates') ? 2 : 4;
+  return 0;
+}
+
+function homeMatchWeight(rec){
+  const studentUni=els.studentUni.value;
+  if(!studentUni || studentUni==='Other') return 0;
+  if((rec.university_name||'')===studentUni) return 6;
+  return 0;
+}
+
+function sectionAllowed(section, univName){
+  const studentUni=els.studentUni.value;
+  const isHomeMatch = studentUni && studentUni!=='Other' && univName===studentUni;
+  if(!section || section.includes('State Level')) return true;
+  const isHomeSeat = section.includes('Home University Seats');
+  const forHomeCand = section.includes('Home University Candidates');
+  if(isHomeSeat && forHomeCand) return isHomeMatch;
+  if(isHomeSeat && !forHomeCand) return !isHomeMatch;
+  if(!isHomeSeat && forHomeCand) return isHomeMatch;
+  if(!isHomeSeat && !forHomeCand) return true;
+  return true;
+}
+
+function confidenceBand(gap){ if(gap>=12) return 'safe'; if(gap>=4) return 'target'; return 'ambitious'; }
+function bandWeight(gap){ const m=state.mode; if(m==='safe') return gap>=10?4:gap>=5?2:0; if(m==='target') return gap>=4&&gap<10?4:gap>=10?1:0; if(m==='ambitious') return gap<4?4:gap>=4?1:0; return gap>=10?3:gap>=4?4:2; }
+function rankCategory(cat,targetSet){ if(targetSet.has(cat)) return 100; if(/^L/.test(cat) && els.gender.value==='L') return 80; if(/^GOPEN/.test(cat) || /^LOPEN/.test(cat) || cat==='GOPENS' || cat==='LOPENS') return 60; return 20; }
+
+function inferInstituteType(r){
+  const s=String(r.status||'').toLowerCase();
+  if(s.includes('autonomous')) return 'Autonomous Institute';
+  if(s.includes('university department') || s.includes('university')) return 'University Department';
+  if(s.includes('government') || s.includes('govt')) return 'Government';
+  if(s.includes('un-aided') || s.includes('unaided') || s.includes('private') || s.includes('pvt') || s.includes('aided')) return 'Un-Aided';
+  return s || 'Unknown';
+}
+
+function runFilter(){
+  if(!state.raw.length){ render([]); return; }
+  const p=Number(els.percentile.value||0), q=els.search.value.trim().toLowerCase(), uniType=els.universityType.value, targetCats=new Set(getPrefixes());
+
+  const pool=state.raw.filter(r=>{
+    if(!r || typeof r!=='object') return false;
+    const inst=inferInstituteType(r);
+    if(uniType && inst!==uniType) return false;
+    if(q){ const hay=`${r.college_name||''} ${r.program_name||''} ${r.college_code||''}`.toLowerCase(); if(!hay.includes(q)) return false; }
+    if(els.seatType.value!=='auto'){
+      if(els.seatType.value==='S' && !(r.section||'').includes('State Level')) return false;
+      if(els.seatType.value!=='S' && (r.section||'').includes('State Level')) return false;
+    }
+    if(!sectionAllowed(r.section, r.university_name)) return false;
+    return true;
+  });
+
+  const eligible=pool.filter(r=>Number(r.percentile)<=p && targetCats.has(r.category));
+
+  const grouped=new Map();
+  for(const r of eligible){
+    const key=`${r.college_code}|${r.program_code}`;
+    const gap=+(p-Number(r.percentile||0)).toFixed(6);
+    const score=(Number(r.percentile)||0)*100000 + sectionWeight(r.section)*1000 + rankCategory(r.category,targetCats)*10 + bandWeight(gap) + homeMatchWeight(r)*0.01;
+    const prev=grouped.get(key);
+    if(!prev || Number(r.percentile)>Number(prev.percentile) || (Number(r.percentile)===Number(prev.percentile) && score>prev._score)){
+      grouped.set(key,{...r,_score:score,_gap:gap,_band:confidenceBand(gap)});
+    }
+  }
+
+  const results=[...grouped.values()].sort((a,b)=>Number(b.percentile)-Number(a.percentile) || b._score-a._score || (a.college_name||'').localeCompare(b.college_name||''));
+
+  els.eligibleCount.textContent=eligible.length.toLocaleString();
+  els.displayCount.textContent=results.length.toLocaleString();
+
+  const hints={safe:'Safe mode favors larger percentile margins.',target:'Target mode highlights near-match options.',ambitious:'Ambitious mode brings in stretch options with smaller margins.',balanced:'Balanced mode mixes preference and cutoff strength.'};
+  els.preferenceHint.textContent=hints[state.mode]||hints.balanced;
+
+  render(results.slice(0,300));
+}
+
+function render(results){
+  if(!state.raw.length){ els.resultList.innerHTML='<div class="empty">Data not loaded yet. Reload the page.</div>'; els.eligibleCount.textContent='0'; els.displayCount.textContent='0'; return; }
+  if(!results.length){ els.resultList.innerHTML='<div class="empty">No matching eligible branches found. Try adjusting percentile, university, or category filters.</div>'; return; }
+  els.resultList.innerHTML=results.map(r=>{
+    const gap=Number(r._gap||0).toFixed(2);
+    const inst=inferInstituteType(r) || 'Unknown';
+    return `<article class="card"><div class="card-top"><div><h3>${escapeHtml(r.college_name||'')}</h3><div class="muted">${escapeHtml(r.program_name||'')}</div></div><div class="score ${r._band==='safe'?'good':''}">${r._band.toUpperCase()} · Cutoff ${Number(r.percentile).toFixed(2)}</div></div><div class="meta"><div><span>Institute type</span><strong>${escapeHtml(inst)}</strong></div><div><span>Seat section</span><strong>${shortSection(r.section||'')}</strong></div><div><span>Stage</span><strong>${escapeHtml(r.stage||'')}</strong></div><div><span>Percentile margin</span><strong class="eligible">+${gap}</strong></div></div><div class="tag-row"><div class="tag">${escapeHtml(r.college_code||'')}</div><div class="tag">Program ${escapeHtml(r.program_code||'')}</div><div class="tag">Merit no. ${escapeHtml(String(r.merit_no ?? ''))}</div><div class="tag">Category ${escapeHtml(r.category||'')}</div><div class="tag">${escapeHtml(r.university_name||'')}</div></div></article>`;
+  }).join('');
+}
+
+function shortSection(s){
+  return s.replace('Home University Seats Allotted to Home University Candidates','HU → HU')
+          .replace('Home University Seats Allotted to Other Than Home University Candidates','HU → OHU')
+          .replace('Other Than Home University Seats Allotted to Other Than Home University Candidates','OHU → OHU')
+          .replace('Other Than Home University Seats Allotted to Home University Candidates','OHU → HU')
+          .replace('State Level','State Level');
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"]+/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]||m)); }
+
+window.addEventListener('load', loadBundled);
+</script>
+</body>
+</html>
